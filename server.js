@@ -32,11 +32,12 @@ var dbDetails = new Object();
 var initDb = function(callback) {
   if (mongoURL == null) return;
 
-  var mongodb = require('mongodb');  
+  var mongodb = require('mongodb');
   if (mongodb == null) return;
 
   mongodb.connect(mongoURL, function(err, conn) {
     if (err) {
+      console.log ("Error on connect to mongo Url=" + mongoURL);
       callback(err);
       return;
     }
@@ -68,7 +69,7 @@ app.get('/pagecount', function (req, res) {
     db.collection('counts').count(function(err, count ){
       res.send('{ pageCount: ' + count +'}');
     });
-  } else { 
+  } else {
     res.send('{ pageCount: -1 }');
   }
 });
